@@ -1,0 +1,153 @@
+import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
+import { supabase } from '../lib/supabase';
+import type { AppUser, AuthContextType } from '../types/user';
+import { AuthChangeEvent, Session } from '@supabase/supabase-js';
+
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
+
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error('useAuth must be used within AuthProvider');
+  }
+  return context;
+};
+
+export const AuthProvider = ({ children }: { children: ReactNode }) => {
+    const [user, setUser] = useState<AppUser | null>(null);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
+
+    useEffect(() => {
+    const checkSession = async () => {
+        try {
+            const { data: { session }, error } = await supabase.auth.getSession();
+        
+            if (error) {
+            console.error("Error checking session: ", error);
+            setUser(null);
+            } else if (session?.user) {
+            setUser({
+                id: session.user.id,
+                email: session.user.email || '',
+            });
+            } else {
+            setUser(null);
+            }
+        }
+        catch (err) {
+            console.error("Unexpected error during session check: ", err)
+            setUser(null);
+        }
+        finally {
+            setIsLoading(false);
+        }
+    };
+
+    checkSession();
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (_event: AuthChangeEvent, session: Session | null) => {
+        if (session?.user) {
+          setUser({
+            id: session.user.id,
+            email: session.user.email || '',
+          });
+        } else {
+          setUser(null);
+        }
+        setIsLoading(false);
+      }
+    );
+
+    return () => {
+      subscription.unsubscribe();
+    };
+    }, []);
+
+    const signUp = async (email: string, password: string, name: string) => {
+      setIsLoading(true);
+      setError(null);
+
+      try {
+        const { error: signUpError } = await supabase.auth.signUp({
+          email,
+          password,
+          options: { data: {name}},
+        });
+
+        if (signUpError) {
+          setError(signUpError.message);
+          throw signUpError;
+        }
+      } catch (err: any) {
+        console.error("Sign up error: ", err);
+        setError(err.message || 'Sign up failed');
+        throw err;
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    const signIn = async (email: string, password: string) => {
+      setIsLoading(true);
+      setError(null);
+
+      try {
+        const { error: signInError } = await supabase.auth.signInWithPassword({
+          email,
+          password,
+        });
+
+        if (signInError) {
+          setError(signInError.message);
+          throw signInError;
+        }
+      } catch (err: any) {
+        console.error("Sign in error: ", err);
+        setError(err.message || 'Sign in failed');
+        throw err;
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    const signOut = async () => {
+      setIsLoading(true);
+      setError(null);
+
+      try {
+        const { error: signOutError } = await supabase.auth.signOut();
+
+        if (signOutError) {
+          setError(signOutError.message);
+          throw signOutError;
+        }
+      } catch (err: any) {
+        console.error('Sign out error: ', err);
+        setError(err.message || 'Sign out failed');
+        throw err;
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    const clearError = () => setError(null);
+
+    const value: AuthContextType = {
+    user,
+    isAuthenticated: !!user,
+    isLoading,
+    error,
+    signUp,
+    signIn,
+    signOut,
+    clearError,
+  };
+
+  return (
+    <AuthContext.Provider value={value}>
+      {children}
+    </AuthContext.Provider>
+  );
+}

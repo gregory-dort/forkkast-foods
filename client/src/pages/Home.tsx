@@ -1,9 +1,10 @@
 import { useState } from 'react';
+import { useAuth } from '../contexts/AuthContext';
 import { Header, Footer, SideNavbar } from '../components';
 import { Hero, ScheduleCard } from '../pages';
 
 const Home = () => {
-    const { isAuthenticated } = useAuth();
+    const { user, isAuthenticated } = useAuth();
 
     return (
         <div className = "bg-[#cbd5c0]">

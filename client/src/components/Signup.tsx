@@ -1,16 +1,16 @@
 import { useState } from 'react';
 
 const SignUpForm = () => {
-    const [email, setEmail] = useState("");
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const [message, setMessage] = useState("");
-    const [error, setError] = useState("");
+    const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [message, setMessage] = useState('');
+    const [error, setError] = useState('');
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        setMessage("");
-        setError("");
+        setMessage('');
+        setError('');
 
         try {
             // send POST request to API
@@ -24,9 +24,9 @@ const SignUpForm = () => {
 
             if (response.ok) {
                 setMessage(data.message);
-                setEmail("");
-                setUsername("");
-                setPassword("");
+                setEmail('');
+                setUsername('');
+                setPassword('');
             } else {
                 setError(data.error);
             }
