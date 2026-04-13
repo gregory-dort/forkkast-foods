@@ -111,7 +111,26 @@ module.exports = (supabase) => {
   })
 
   router.get('/all-meals', verifyAuth, async(req, res) => {
-    console.log("All meals retrieved");
+    try {
+      const userID = req.user.id;
+
+      const { data, error } = await supabase
+        .from('meals')
+        .select('*')
+        .eq('user_id', userID)
+        .order('category', { ascending: true });
+      
+        if (error) {
+          console.error('Database error retrieving meals', error)
+          return res.status(500).json({ success: false, error: 'Unable to retrieve meals. please try again.' });
+        }
+
+        return res.status(200).json({ success: true, meals: data });
+
+    } catch (error) {
+      console.error('Error retrieving meals', error);
+      res.status(500).json({ success: false, error: 'An unexpected error occurred. Please try again.' });
+    }
   });
 
   return router;
