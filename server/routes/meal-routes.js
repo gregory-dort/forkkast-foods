@@ -9,8 +9,8 @@ module.exports = (supabase) => {
   The routes are as follows: 
   add-meal (POST): Adds a new meal to a users collection
   delete-meal/:id (DELETE): deletes a meal within a users collection by searching for it by its mealID
-  update-meal (PUT): updates the information for a meal within a users collection
-  get-meal (GET): requests the information for one meal in a users collection
+  update-meal/:id (PUT): updates the information for a meal within a users collection
+  get-meal/:id (GET): requests the information for one meal in a users collection
   all-meals (GET): requests the information for all meals in a users collection
   */
 

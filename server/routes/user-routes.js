@@ -8,7 +8,7 @@ module.exports = (supabase) => {
     signin (POST): allows a user to login with their credentials
     signout (POST): ends the users session by removing their JWT
     */
-   
+
     const router = express.Router();
 
     // API endpoint to create a new user
@@ -37,7 +37,6 @@ module.exports = (supabase) => {
                 password: password
             })
 
-            // Returns authError if issue with signUp
             if (authError) {
                 console.error('Supabase Auth Error: ', authError);
                 return res.status(400).json({ error: authError.message });
@@ -64,7 +63,6 @@ module.exports = (supabase) => {
         }
     });
 
-    // API endpoint to sign in
     router.post("/signin", async (req, res) => {
         const { email, password } = req.body;
 
