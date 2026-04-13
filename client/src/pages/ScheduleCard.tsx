@@ -1,4 +1,4 @@
-import { SectionCard } from "../components";
+import { SectionCard, Schedule } from "../components";
 const ScheduleCard = () => {
     return (
         <section id = "schedule" className = "py-24 container mx-auto px-4">
@@ -6,7 +6,7 @@ const ScheduleCard = () => {
                     Schedule
             </h1>
             <SectionCard>
-                {/* Insert Schedule Component */}
+                <Schedule />
             </SectionCard>
         </section>
     );

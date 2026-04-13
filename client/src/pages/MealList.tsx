@@ -1,4 +1,4 @@
-import { SectionCard } from "../components";
+import { SectionCard, Meals } from "../components";
 
 const MealList = () => {
     return (
@@ -7,7 +7,7 @@ const MealList = () => {
                     Meal List
             </h1>
             <SectionCard>
-                {/* Insert Meal List Component */}
+                <Meals />
             </SectionCard>
         </section>
     );

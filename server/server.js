@@ -9,10 +9,6 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 
-// Import API Routes
-const mealRoutes = require('./routes/meal-routes.js');
-const userRoutes = require('./routes/user-routes.js');
-
 // Express app creation and port configuration
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -24,9 +20,12 @@ app.use(cors({
 }));
 app.use(bodyParser.json());
 
-// API Routes
-app.use("/api/meals", mealRoutes);
-app.use("/api/users", userRoutes);
+//Mounting API Routes
+const mealRouter = require('./routes/meal-routes.js');
+app.use('/api/meals', mealRouter(supabase));
+
+const userRouter = require('./routes/user-routes.js');
+app.use("/api/users", userRouter(supabase));
 
 // Test to see if server is running
 app.get("/", (req, res) => {
@@ -34,5 +33,5 @@ app.get("/", (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Forkast is running on http://localhost:${PORT}`);
+  console.log(`Forkast is running on ${PORT}`);
 });

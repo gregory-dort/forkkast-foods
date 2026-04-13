@@ -1,5 +1,14 @@
 const express = require('express');
 module.exports = (supabase) => {
+    /*
+    These routes handle user login, logout and sign up operations of the web application utilizing the supabase authentication system by calling the appropriate APIs provided by supabase.
+
+    The routes are as follows:
+    signup (POST): creates a new user account and profile within the database
+    signin (POST): allows a user to login with their credentials
+    signout (POST): ends the users session by removing their JWT
+    */
+   
     const router = express.Router();
 
     // API endpoint to create a new user
