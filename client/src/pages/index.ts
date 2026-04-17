@@ -1,6 +1,6 @@
-import Hero from './Hero.tsx';
+import Landing from './Landing.tsx';
 import Home from './Home.tsx';
 import ScheduleCard from './ScheduleCard.tsx';
-import MealList from './MealList';
+import MealList from './MealCard.tsx';
 
-export { Hero, Home, ScheduleCard, MealList };
+export { Landing, Home, ScheduleCard, MealList };

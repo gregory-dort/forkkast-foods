@@ -1,53 +1,25 @@
 import { useState } from 'react';
-import Modal from './Modal';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 
 const Header = () => {
-    // Function to open sign up / sign in modal
-    const [showModal, setShowModal] = useState(false);
-    const [modalContent, setModalContent] = useState<'signin' | 'signup'>('signin');
-
-    const handleModal = () => {
-        
-    }
-
-    // Function to sign out of account added here later
-    const handleSignOut = async () => {
-       try {
-        const response = await fetch('/api/users/signout', {
-            method: 'POST',
-            headers: { 'Conetnt-type': 'application/json'}
-        })
-
-        const result = await response.json();
-
-        if (response.ok) {
-            //Redirect to landing page
-        }
-       } catch (err) {
-        console.error('Network or server-side error: ', err); 
-       }
-    }
+    const navigate = useNavigate();
 
     return (
-        <div className = "fixed top-0 bg-gradient-to-r from-[#FDA4BA] to-[#F7879A] w-full flex flex-row shadow-lg justify-center items-center p-2 z-50">
-            {/* Left of Navbar */}
-            <div className = "flex-none w-1/2 flex justify-start items-center">
-                <img src="/images/preptime-logo.png" alt="PrepTime Logo" className = "h-20 w-auto max-w-full"/>
-            </div>
+        <>
+            <div className = "fixed top-0 bg-tan w-full flex flex-row shadow-lg justify-center items-center p-2 z-50">
+                {/* Left of Navbar */}
+                <div className = "flex-none w-1/2 flex justify-start items-center">
+                    <img src="/images/preptime-logo.png" alt="PrepTime Logo" className = "h-20 w-auto max-w-full"/>
+                </div>
 
-            {/* Right Side of Navbar */}
-            <div className = "w-1/2 flex justify-end items-center space-x-4">
-                {/* Needs conditional rendering later on. Currently adding all buttons needed to the Navbar and will fix later*/}
-                 <button
-                    onClick = {handleModal}
-                    className = "text-black px-4 py-2 font-medium rounded-md bg-[#FFFFF0] shadow-md"
-                >Sign Up</button>
-                <button
-                    onClick = {handleSignOut}
-                    className = "text-black px-4 py-2 font-medium rounded-md bg-[#FFFFF0] shadow-md"
-                >Sign Out</button>
+                {/* Right Side of Navbar */}
+                <div className = "w-1/2 flex justify-end items-center space-x-4">
+                    {/* Needs conditional rendering later on. Currently adding all buttons needed to the Navbar and will fix later*/}
+                </div>
             </div>
-        </div>
+        </>
+        
     )
 }
 

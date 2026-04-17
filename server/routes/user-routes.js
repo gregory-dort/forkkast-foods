@@ -41,8 +41,8 @@ module.exports = (supabase) => {
 
             const userID = authData.user.id;
             const { data: userData, error: userError } = await supabase
-            .from('users')
-            .insert({ id: userID, email: email, name: username});
+            .from('profiles')
+            .insert({ id: userID, email: email, name: username });
 
             if (userError) {
                 console.error('Supabase User Insert Error: ', userError);
@@ -77,9 +77,9 @@ module.exports = (supabase) => {
                 return res.status(400).json({ error: authError.message });
             }
 
-            const { data: userData } = await supabase
-            .from('users')
-            .select('name')
+            const { data: userData, error: userDataError } = await supabase
+            .from('profiles')
+            .select('email, name')
             .eq('id', authData.user.id)
             .single();
 

@@ -7,7 +7,7 @@
 
  const SectionCard = ({ children, className }: SectionCardProps) => {
     return(
-        <div className = {`bg-[#FFFFF0] shadow-xl p-12 md:p-15 rounded-xl mx-auto max-w-7xl ${className || ''}`}>
+        <div className = {`bg-mint shadow-xl p-12 md:p-15 rounded-xl mx-auto max-w-7xl ${className || ''}`}>
             {children}
         </div>
     );
