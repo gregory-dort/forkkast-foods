@@ -9,7 +9,7 @@ const validateName = (name) => {
         return { valid: false, error: 'Invalid meal name' };
     }
 
-    trimmedName = name.trim();
+    const trimmedName = name.trim();
     if (trimmedName.length === 0) {
         return { valid: false, error: 'Meal name cannot be empty' };
     }
@@ -136,25 +136,25 @@ const validateCategory = (category) => {
     This value is required on the meal entry form as it helps filter user meals by category.
     */
 
-    const allowedCategories = ['breakfast', 'lunch', 'dinner', 'snack'];
+    const allowedCategories = ['Breakfast', 'Lunch', 'Dinner', 'Snack'];
 
     if (!category || typeof category !== 'string') {
         return { valid: false, error: 'Invalid category' };
     }
 
-    const lowerCategory = category.toLowerCase();
-    if (!allowedCategories.includes(lowerCategory)) {
-        return { valid: false, error: 'Category must be one of the following: breakfast, lunch, dinner, snack' };
+    const capitalizedCategory = category.charAt(0).toUpperCase() + category.slice(1).toLowerCase();
+
+    if (!allowedCategories.includes(capitalizedCategory)) {
+        return { valid: false, error: 'Category must be one of the following: Breakfast, Lunch, Dinner, Snack' };
     }
 
-    return { valid: true, value: lowerCategory };
+    return { valid: true, value: capitalizedCategory };
 };
 
 module.exports = {
     validateName,
     validateServings,
     validatePrepTime,
-    validateIngredients,
     validateIngredients,
     validateCategory,
     validateInstructions

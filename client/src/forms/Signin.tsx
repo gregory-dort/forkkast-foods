@@ -47,7 +47,7 @@ const SignInForm = ({ onSuccess }: SignInFormProps) => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                    className='rounded-md border bg-cream px-4 py-2 w-full mb-4 focus:outline-none'
+                    className='rounded-md border-tan bg-cream px-4 py-2 w-full mb-4 focus:outline-none'
                 />
                 <label htmlFor='password' className='block text-sm font-medium text-warm-brown mb-1'>
                     Password
@@ -58,11 +58,11 @@ const SignInForm = ({ onSuccess }: SignInFormProps) => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
-                    className='rounded-md border bg-cream px-4 py-2 w-full mb-4 focus:outline-none'
+                    className='rounded-md border-tan bg-cream px-4 py-2 w-full mb-4 focus:outline-none'
                 />
                 <button
                     type='submit'
-                    className='bg-forest-green hover:bg-deep-green rounded-full text-warm-brown'
+                    className='bg-forest-green hover:bg-deep-green rounded-full text-warm-brown p-2'
                 >
                     Sign In
                 </button>

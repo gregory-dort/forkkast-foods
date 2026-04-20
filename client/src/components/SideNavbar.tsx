@@ -51,32 +51,33 @@ const SideNavbar = ({ isOpen, setIsOpen }: SideNavbarProps) => {
     if (isLoading) return null;
 
     return (
-        <div ref={sidebarRef} className={`fixed left-0 h-screen shadow-md p-2 z-50 bg-mint transition-all duration-300 ${isOpen ? 'w-64' : 'w-10'}`}>
+        <div ref={sidebarRef} className={`fixed left-0 h-screen shadow-md p-2 z-50 bg-mint overflow-hidden transition-all duration-500 ${isOpen ? 'w-64' : 'w-14'}`}>
             <button 
                 onClick={() => setIsOpen(!isOpen)}
-                className='self-end p-1 bg-forest-green hover:bg-deep-green rounded-xl text-warm-brown'
+                className='self-end bg-forest-green hover:bg-deep-green rounded-full px-3 py-2 text-warm-brown'
             >
                 {isOpen ? '←' : '→'}
             </button>
 
-            {isOpen && (
+            <div className={`transition-opacity duration-500 ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
                 <div className = 'flex flex-col w-full mt-8 items-center justify-center'>
                     {isAuthenticated ? (
-                        <div className='flex flex-col'>
+                        <div className='flex flex-col text-warm-brown items-stretch'>
                             <p>{user?.name}</p>
                             <button onClick={handleAccountModal} className='bg-forest-green hover:bg-deep-green rounded-lg p-2 mb-8'>Account Settings</button>
                             <button onClick={handleSignOut} className='bg-forest-green hover:bg-deep-green rounded-lg p-2 mb-8'>Sign Out</button>
+                            <button onClick={() => navigate('/meals')} className='bg-forest-green hover:bg-deep-green rounded-lg p-2 mb-8'>My Meals</button>
                         </div>
                 ) : (
-                    <div className='flex flex-col mt-40 items-stretch'>
-                        <h3 className='text-md text-warm-brown'>Returning User? Sign In Here!</h3>
-                        <button onClick={() => handleAuthModal('signin')} className='bg-forest-green hover:bg-deep-green text-warm-brown rounded-lg p-2 mb-8'>Sign In</button>
-                        <h3 className='text-md text-warm-brown'>New User? Create an Account!</h3>
-                        <button onClick={() => handleAuthModal('signup')} className='bg-forest-green hover:bg-deep-green text-warm-brown rounded-lg p-2 mb-8'>Sign Up</button>
+                    <div className='flex flex-col mt-40 text-warm-brown items-stretch'>
+                        <h3 className='text-md'>Returning User? Sign In Here!</h3>
+                        <button onClick={() => handleAuthModal('signin')} className='bg-forest-green hover:bg-deep-green rounded-lg p-2 mb-8'>Sign In</button>
+                        <h3 className='text-md'>New User? Create an Account!</h3>
+                        <button onClick={() => handleAuthModal('signup')} className='bg-forest-green hover:bg-deep-green rounded-lg p-2 mb-8'>Sign Up</button>
                     </div>
                 )}
                 </div>
-            )}
+            </div>
             
             <Modal 
                     showModal={showAuthModal} 

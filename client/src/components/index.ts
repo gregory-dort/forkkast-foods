@@ -4,9 +4,12 @@ import SectionCard from './SectionCard';
 import Modal from './Modal';
 import SideNavbar from './SideNavbar';
 import Schedule from './Schedule';
-import Meals from './Meals';
+import MealCard from './MealCard';
 import Hero from './Hero';
 import LandingHero from './LandingHero';
+import MealDetailModal from './MealDetailModal';
+import DeleteConfirmModal from './DeleteConfirmModal';
+import MealFormModal from './MealFormModal';
 
 export {
     Header,
@@ -15,7 +18,10 @@ export {
     Modal,
     SideNavbar,
     Schedule,
-    Meals,
+    MealCard,
     Hero,
-    LandingHero
+    LandingHero,
+    MealFormModal,
+    DeleteConfirmModal,
+    MealDetailModal
 };

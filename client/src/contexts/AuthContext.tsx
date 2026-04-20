@@ -27,13 +27,28 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             console.error("Error checking session: ", error);
             setUser(null);
             } else if (session?.user) {
-            setUser({
-                id: session.user.id,
-                email: session.user.email || '',
-                name: session.user.user_metadata?.name || ''
-            });
+              const name = session.user.user_metadata?.name || '';
+
+              if (!name) {
+                const { data } = await supabase
+                  .from('profiles')
+                  .select('name')
+                  .eq('id', session.user.id)
+                  .single();
+                setUser({
+                  id: session.user.id, 
+                  email: session.user.email || '', 
+                  name: data?.name || ''
+                });
+              } else {
+                setUser({ 
+                  id: session.user.id, 
+                  email: session.user.email || '', 
+                  name 
+                });
+              }
             } else {
-            setUser(null);
+              setUser(null);
             }
         }
         catch (err) {
@@ -49,16 +64,34 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (_event: AuthChangeEvent, session: Session | null) => {
-        if (session?.user) {
-          setUser({
-            id: session.user.id,
-            email: session.user.email || '',
-            name: session.user.user_metadata.name || ''
-          });
-        } else {
-          setUser(null);
-        }
-        setIsLoading(false);
+        const updateUser = async () => {
+            if (session?.user) {
+                const name = session.user.user_metadata?.name || '';
+                
+                if (!name) {
+                    const { data } = await supabase
+                        .from('profiles')
+                        .select('name')
+                        .eq('id', session.user.id)
+                        .single<{ name: string }>();
+                    setUser({ 
+                        id: session.user.id, 
+                        email: session.user.email || '', 
+                        name: data?.name || '' 
+                    });
+                } else {
+                    setUser({ 
+                        id: session.user.id, 
+                        email: session.user.email || '', 
+                        name 
+                    });
+                }
+              } else {
+                  setUser(null);
+              }
+              setIsLoading(false);
+          };
+          updateUser();
       }
     );
 
@@ -138,6 +171,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     const value: AuthContextType = {
     user,
+    name: '',
     isAuthenticated: !!user,
     isLoading,
     error,

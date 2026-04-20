@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import { useState } from 'react';
-import { Home, Landing } from './pages';
+import { Home, Landing, MealsPage } from './pages';
 import { Header, Footer, SideNavbar } from './components';
 import './App.css';
 
@@ -15,6 +15,7 @@ const App = () => {
         <Routes>
           <Route path='/' element={<Landing /> } />
           <Route path='/home' element={<Home /> } />
+          <Route path='/meals' element={<MealsPage />} />
         </Routes>
         <Footer />
       </main>
