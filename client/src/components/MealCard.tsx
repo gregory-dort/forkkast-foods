@@ -10,8 +10,8 @@ type MealCardProps = {
 
 const MealCard = ({ meal, showActions, onUpdate, onDelete, onSelect }: MealCardProps) => {
     return (
-        <div onClick={onSelect} className='bg-off-white rounded-lg shadow-md flex flex-col p-4 gap-2 cursor-pointer hover:shadow-lg transition duration-300 overflow-y-auto max-h-[80vh]'>
-            <h2 className='text-xl font-serif font-bold text-warm-brown'>{meal.name}</h2>
+        <div onClick={onSelect} className='bg-off-white rounded-lg shadow-md flex flex-col p-4 gap-2 cursor-pointer hover:shadow-lg transition font-serif duration-300 overflow-y-auto max-h-[80vh]'>
+            <h2 className='text-xl font-bold text-warm-brown underline underline-offset-4 decoration-2'>{meal.name}</h2>
             <p className='text-sm text-warm-brown'>Meal Category: {meal.category}</p>
             <p className='text-sm text-warm-brown'>Servings: {meal.servings}</p>
 

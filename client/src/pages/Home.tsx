@@ -1,6 +1,6 @@
 import { useRef, useEffect } from 'react';
 import useMeals from '../hooks/useMeals';
-import { useAuth } from '../contexts/AuthContext';
+import { useAuth } from '../hooks/useAuth';
 import { Hero } from '../components';
 import { ScheduleCard, RecentMealsCard } from '../pages';
 

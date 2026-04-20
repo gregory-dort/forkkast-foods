@@ -11,7 +11,7 @@ const App = () => {
     <>
       <Header />
       <SideNavbar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
-      <main className={`transition-all duration-300 ${isSidebarOpen ? 'ml-64' : 'ml-10'}`}>
+      <main className={`transition-all duration-500 ${isSidebarOpen ? 'ml-64' : 'ml-10'}`}>
         <Routes>
           <Route path='/' element={<Landing /> } />
           <Route path='/home' element={<Home /> } />

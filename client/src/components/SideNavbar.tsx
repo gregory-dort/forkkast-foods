@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { useAuth } from '../contexts/AuthContext';
+import { useAuth } from '../hooks/useAuth';
 import { SignInForm, SignUpForm, AccountSettingsForm } from '../forms';
 import Modal from './Modal';
 import { useNavigate } from 'react-router';
@@ -63,7 +63,7 @@ const SideNavbar = ({ isOpen, setIsOpen }: SideNavbarProps) => {
                 <div className = 'flex flex-col w-full mt-8 items-center justify-center'>
                     {isAuthenticated ? (
                         <div className='flex flex-col text-warm-brown items-stretch'>
-                            <p>{user?.name}</p>
+                            <p className='font-bold underline underline-offset-4 decoration-2 mb-4'>{user?.name}</p>
                             <button onClick={handleAccountModal} className='bg-forest-green hover:bg-deep-green rounded-lg p-2 mb-8'>Account Settings</button>
                             <button onClick={handleSignOut} className='bg-forest-green hover:bg-deep-green rounded-lg p-2 mb-8'>Sign Out</button>
                             <button onClick={() => navigate('/meals')} className='bg-forest-green hover:bg-deep-green rounded-lg p-2 mb-8'>My Meals</button>

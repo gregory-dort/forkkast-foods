@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { LandingHero } from '../components';
-import { useAuth } from '../contexts/AuthContext';
+import { useAuth } from '../hooks/useAuth';
 
 const Landing = () => {
     const { isAuthenticated } = useAuth();
