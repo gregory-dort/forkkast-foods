@@ -9,6 +9,10 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const supabase = require('@supabase/supabase-js').createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_KEY);
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://gregory-dort.github.io/forkkast-foods'
+];
 
 // Express app creation and port configuration
 const app = express();
@@ -16,7 +20,7 @@ const PORT = process.env.PORT;
 
 // Middleware
 app.use(cors({
-  origin: 'http://localhost:5173',
+  origin: allowedOrigins,
   credentials: true
 }));
 app.use(bodyParser.json());
