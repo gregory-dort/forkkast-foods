@@ -13,7 +13,7 @@ const Modal = ({ showModal, onClose, children }: ModalProps) => {
             <div className = "relative bg-mint p-8 w-4xl min-h-[300px] rounded-lg shadow-xl">
                 <button
                     onClick={onClose}
-                    className="absolute top-2 right-2 bg-forest-green hover:bg-deep-green transition duration-300 px-4 py-2 font-medium text-warm-brown rounded-full">
+                    className="absolute top-2 right-2 bg-emerald-green hover:bg-deep-green transition duration-300 px-4 py-2 font-medium text-warm-brown rounded-full">
                         &times;
                 </button>
                 {children}

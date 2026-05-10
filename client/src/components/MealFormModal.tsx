@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import type { Ingredient, Meal, MealFormData } from '../types/meals';
+import type { Ingredient, Meal } from '../types/meals';
 
 type MealFormModalProps = {
     meal: Meal | null;
-    onSubmit: (mealData: MealFormData) => Promise<void>;
+    onSubmit: (mealData) => Promise<void>;
 }
 
 const MealFormModal = ({ meal, onSubmit }: MealFormModalProps) => {
@@ -15,9 +15,18 @@ const MealFormModal = ({ meal, onSubmit }: MealFormModalProps) => {
     const [category, setCategory] = useState(meal?.category || '');
     const [error, setError] = useState('');
     const [ingredientInput, setIngredientInput] = useState<{name: string, amount: string, unit: string}>({ name: '', amount: '', unit: ''});
+    const [ingredientError, setIngredientError] = useState('');
 
     const handleAddIngredient = () => {
-        if (ingredientInput.name.trim() === '') return;
+        if (ingredientInput.name.trim() === '') {
+            setIngredientError('Ingredient name can not be empty.');
+            return;
+        }
+
+        if (ingredientInput.amount && Number(ingredientInput.amount) <= 0) {
+            setIngredientError('Ingredient can not be less than zero or equal zero');
+            return;
+        }
 
         setIngredients(prev => [...prev, {
         name: ingredientInput.name.trim(),
@@ -26,7 +35,7 @@ const MealFormModal = ({ meal, onSubmit }: MealFormModalProps) => {
         }]);
 
         setIngredientInput({ name: '', amount: '', unit: ''});
-    } 
+    }
 
     const handleRemoveIngredient = (index: number) => {
         setIngredients(prev => prev.filter((_, i) => i !== index));
@@ -119,6 +128,7 @@ const MealFormModal = ({ meal, onSubmit }: MealFormModalProps) => {
                          />
                         <input
                             type="number"
+                            min='0'
                             value={ingredientInput.amount}
                             onChange={(e) => setIngredientInput(prev => ({ ...prev, amount: e.target.value }))}
                             className="rounded-md border-tan bg-cream px-4 py-2 focus:outline-none w-20"
@@ -139,6 +149,7 @@ const MealFormModal = ({ meal, onSubmit }: MealFormModalProps) => {
                             Add
                         </button>
                     </div>
+                    {ingredientError && <p className='text-terracotta text-sm'>{ingredientError}</p>}
                     <ul className="flex flex-col gap-1">
                         {ingredients.map((ingredient, index) => (
                             <li key={index} className="flex flex-row justify-between items-center bg-cream rounded-md px-4 py-2">
@@ -163,6 +174,7 @@ const MealFormModal = ({ meal, onSubmit }: MealFormModalProps) => {
                     <label className='text-sm font-medium text-warm-brown'>Servings</label>
                     <input
                     type='number'
+                    min='1'
                     placeholder='Enter Meal Serving Size'
                     value={servings}
                     onChange={(e) => setServings(Number(e.target.value))}
@@ -175,6 +187,7 @@ const MealFormModal = ({ meal, onSubmit }: MealFormModalProps) => {
                     <label className="text-sm font-medium text-warm-brown">Prep Time (minutes)</label>
                     <input
                         type='number'
+                        min='1'
                         placeholder='Enter Cooking Time'
                         value={prepTime}
                         onChange={(e) => setPrepTime(Number(e.target.value))}

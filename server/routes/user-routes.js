@@ -30,23 +30,15 @@ module.exports = (supabase) => {
         try {
             const { data: authData, error: authError } = await supabase.auth.signUp({
                 email: email,
-                name: username,
-                password: password
-            })
+                password: password,
+                options: {
+                    data: { name: username }
+                }
+            });
 
             if (authError) {
                 console.error('Supabase Auth Error: ', authError);
                 return res.status(400).json({ error: authError.message });
-            }
-
-            const userID = authData.user.id;
-            const { data: userData, error: userError } = await supabase
-            .from('profiles')
-            .insert({ id: userID, email: email, name: username });
-
-            if (userError) {
-                console.error('Supabase User Insert Error: ', userError);
-                return res.status(500).json({ error: "Error creating user profile"});
             }
 
             return res.status(201).json({ 

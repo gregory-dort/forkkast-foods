@@ -73,7 +73,7 @@ const SignUpForm = () => {
                 />
                 <button
                     type='submit'
-                    className='bg-forest-green hover:bg-deep-green rounded-full text-warm-brown'
+                    className='bg-emerald-green hover:bg-deep-green rounded-full text-warm-brown'
                 >
                     Sign Up
                 </button>

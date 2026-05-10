@@ -62,7 +62,7 @@ const SignInForm = ({ onSuccess }: SignInFormProps) => {
                 />
                 <button
                     type='submit'
-                    className='bg-forest-green hover:bg-deep-green rounded-full text-warm-brown p-2'
+                    className='bg-emerald-green hover:bg-deep-green rounded-full text-warm-brown p-2'
                 >
                     Sign In
                 </button>

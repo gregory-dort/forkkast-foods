@@ -28,7 +28,7 @@ const Hero = ({scrollToSchedule }: HeroProps) => {
                 </div>
                 {/* Schedule for the current day with a button to look at schedule for the week */}
                 <div className='container mx-auto py-4'>
-                    <button onClick={scrollToSchedule} className='bg-forest-green hover:bg-deep-green text-warm-brown font-serif py-2 px-4 rounded-md shadow-md'>
+                    <button onClick={scrollToSchedule} className='bg-emerald-green hover:bg-deep-green text-charcoal font-serif py-2 px-4 rounded-md shadow-md'>
                         View Schedule for This Week
                     </button>
                 </div>

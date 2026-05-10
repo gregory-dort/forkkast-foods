@@ -54,7 +54,7 @@ const SideNavbar = ({ isOpen, setIsOpen }: SideNavbarProps) => {
         <div ref={sidebarRef} className={`fixed left-0 h-screen shadow-md p-2 z-50 bg-mint overflow-hidden transition-all duration-500 ${isOpen ? 'w-64' : 'w-14'}`}>
             <button 
                 onClick={() => setIsOpen(!isOpen)}
-                className='self-end bg-forest-green hover:bg-deep-green rounded-full px-3 py-2 text-warm-brown'
+                className='self-end bg-emerald-green hover:bg-deep-green rounded-full px-3 py-2 text-warm-brown'
             >
                 {isOpen ? '←' : '→'}
             </button>
@@ -64,16 +64,16 @@ const SideNavbar = ({ isOpen, setIsOpen }: SideNavbarProps) => {
                     {isAuthenticated ? (
                         <div className='flex flex-col text-warm-brown items-stretch'>
                             <p className='font-bold underline underline-offset-4 decoration-2 mb-4'>{user?.name}</p>
-                            <button onClick={handleAccountModal} className='bg-forest-green hover:bg-deep-green rounded-lg p-2 mb-8'>Account Settings</button>
-                            <button onClick={handleSignOut} className='bg-forest-green hover:bg-deep-green rounded-lg p-2 mb-8'>Sign Out</button>
-                            <button onClick={() => navigate('/meals')} className='bg-forest-green hover:bg-deep-green rounded-lg p-2 mb-8'>My Meals</button>
+                            <button onClick={handleAccountModal} className='bg-emerald-green hover:bg-deep-green rounded-lg p-2 mb-8'>Account Settings</button>
+                            <button onClick={handleSignOut} className='bg-emerald-green hover:bg-deep-green rounded-lg p-2 mb-8'>Sign Out</button>
+                            <button onClick={() => navigate('/meals')} className='bg-emerald-green hover:bg-deep-green rounded-lg p-2 mb-8'>My Meals</button>
                         </div>
                 ) : (
                     <div className='flex flex-col mt-40 text-warm-brown items-stretch'>
                         <h3 className='text-md'>Returning User? Sign In Here!</h3>
-                        <button onClick={() => handleAuthModal('signin')} className='bg-forest-green hover:bg-deep-green rounded-lg p-2 mb-8'>Sign In</button>
+                        <button onClick={() => handleAuthModal('signin')} className='bg-emerald-green hover:bg-deep-green rounded-lg p-2 mb-8'>Sign In</button>
                         <h3 className='text-md'>New User? Create an Account!</h3>
-                        <button onClick={() => handleAuthModal('signup')} className='bg-forest-green hover:bg-deep-green rounded-lg p-2 mb-8'>Sign Up</button>
+                        <button onClick={() => handleAuthModal('signup')} className='bg-emerald-green hover:bg-deep-green rounded-lg p-2 mb-8'>Sign Up</button>
                     </div>
                 )}
                 </div>

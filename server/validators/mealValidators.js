@@ -91,9 +91,13 @@ const validateIngredients = (ingredients) => {
         }
 
         if (ingredient.amount !== undefined && ingredient.amount !== null && ingredient.amount !== '') {
-            if (typeof ingredient.amount !== 'number' || ingredient.amount <= 0) {
+            if (isNaN(ingredient.amount) || ingredient.amount <= 0) {
                 return { valid: false, error: 'Invalid ingredient amount'};
-            } 
+            }
+            
+            if (ingredient.amount <= 0) {
+                return { valid: false, error: 'Ingredient must be greater than zero'};
+            }
         }
 
         if (ingredient.unit !== undefined && ingredient.unit !== null && ingredient.unit !== '') {

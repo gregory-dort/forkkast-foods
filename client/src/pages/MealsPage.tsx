@@ -28,7 +28,7 @@ const MealsPage = () => {
                         setIsEditing(false);
                         setShowFormModal(true);
                     }}
-                    className='bg-forest-green hover:bg-deep-green text-warm-brown rounded-md shadow-sm p-4'
+                    className='bg-emerald-green hover:bg-deep-green text-warm-brown rounded-md shadow-sm p-4'
                 >
                     Add Meal
                 </button>
