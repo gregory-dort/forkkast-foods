@@ -3,7 +3,7 @@ import type { Ingredient, Meal } from '../types/meals';
 
 type MealFormModalProps = {
     meal: Meal | null;
-    onSubmit: (mealData) => Promise<void>;
+    onSubmit: (mealData: any) => Promise<void>;
 }
 
 const MealFormModal = ({ meal, onSubmit }: MealFormModalProps) => {

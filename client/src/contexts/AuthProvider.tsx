@@ -1,7 +1,8 @@
 import { supabase } from '../lib/supabase';
-import { AuthChangeEvent, Session } from '@supabase/supabase-js';
+import type { AuthChangeEvent, Session } from '@supabase/supabase-js';
 import { AuthContext } from './AuthContext'
-import { useEffect, useState, ReactNode } from 'react';
+import { useEffect, useState } from 'react';
+import type { ReactNode } from 'react';
 import type { AppUser, AuthContextType } from '../types/user';
 
 
