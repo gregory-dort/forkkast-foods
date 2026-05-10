@@ -1,9 +1,9 @@
-import { useState } from 'react';
+//import { useState } from 'react';
 import { LandingHero } from '../components';
-import { useAuth } from '../hooks/useAuth';
+//import { useAuth } from '../hooks/useAuth';
 
 const Landing = () => {
-    const { isAuthenticated } = useAuth();
+    //const { isAuthenticated } = useAuth();
     return(
         <div className='min-h-screen bg-cream'>
             <LandingHero />
