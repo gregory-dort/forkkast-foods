@@ -11,7 +11,7 @@ const bodyParser = require('body-parser');
 const supabase = require('@supabase/supabase-js').createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_KEY);
 const allowedOrigins = [
   'http://localhost:5173',
-  'https://gregory-dort.github.io/forkkast-foods'
+  'https://gregory-dort.github.io'
 ];
 
 // Express app creation and port configuration
@@ -32,6 +32,10 @@ app.use('/api/meals', mealRouter(supabase));
 const userRouter = require('./routes/user-routes.js');
 app.use("/api/users", userRouter(supabase));
 
+app.get('/', (req, res) => {
+  res.json({ status: 'ok', message: 'Forkkast Foods Connected' });
+});
+
 app.listen(PORT, () => {
-  console.log(`Forkast is running on ${PORT}`);
+  console.log(`Forkkast Foods is running on ${PORT}`);
 });
