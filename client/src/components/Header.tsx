@@ -9,7 +9,7 @@ const Header = () => {
             <div className = "fixed top-0 bg-tan w-full flex flex-row shadow-lg justify-center items-center p-2 z-50">
                 {/* Left of Navbar */}
                 <div className = "flex-none w-1/2 flex justify-start items-center">
-                    <Link to='/home'>
+                    <Link to='/'>
                         <img src="/images/preptime-logo.png" alt="PrepTime Logo" className = "h-20 w-auto max-w-full"/>
                     </Link>
                 </div>
