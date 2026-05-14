@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import useMeals from '../hooks/useMeals';
 import type { Meal } from '../types/meals';
 import MealCard from '../components/MealCard';
@@ -9,6 +10,7 @@ import DeleteConfirmModal from '../components/DeleteConfirmModal';
 
 const MealsPage = () => {
     const { meals, isLoading, error, fetchMeals, addMeal, updateMeal, deleteMeal } = useMeals();
+    const navigate = useNavigate();
     const [selectedMeal, setSelectedMeal] = useState<Meal | null>(null);
     const [showDetailModal, setShowDetailModal] = useState(false);
     const [showFormModal, setShowFormModal] = useState(false);
@@ -22,7 +24,13 @@ const MealsPage = () => {
     return (
         <div className='bg-cream min-h-screen mt-24 p-6'>
             <h1 className='text-3xl font-serif font-bold text-center text-warm-brown mt-20 mb-8'>My Meals</h1>
-            <div className='flex flex-col justify center items-center mb-8'>
+            <div className='flex flex-row justify-center items-center gap-4 mb-8'>
+                <button
+                    onClick={() => navigate('/home')}
+                    className='bg-tan hover:bg-warm-brown text-warm-brown hover:text-cream rounded-md shadow-sm p-4'
+                >
+                    ← Back to Home
+                </button>
                 <button 
                     onClick={() => {
                         setIsEditing(false);
