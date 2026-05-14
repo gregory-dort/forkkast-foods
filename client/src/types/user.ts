@@ -14,4 +14,8 @@ export interface AuthContextType {
     signIn: (email: string, password: string) => Promise<void>;
     signOut: () => Promise<void>;
     clearError: () => void;
+    updateName: (name: string) => Promise<void>;
+    updateEmail: (email: string) => Promise<void>;
+    updatePassword: (password: string) => Promise<void>;
+    deleteAccount: () => Promise<void>;
 }

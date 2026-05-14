@@ -30,6 +30,8 @@ const SideNavbar = ({ isOpen, setIsOpen }: SideNavbarProps) => {
     const handleSignOut = async () => {
         try {
             await signOut();
+            setShowAccountModal(false);
+            setShowAuthModal(false); 
             navigate('/');
         } catch (err) {
             console.error('Error signing out: ', err);

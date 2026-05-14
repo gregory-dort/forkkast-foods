@@ -58,6 +58,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (_event: AuthChangeEvent, session: Session | null) => {
         const updateUser = async () => {
+            if (_event === 'SIGNED_OUT') {
+              setUser(null);
+              setIsLoading(false);
+              return;
+            }
+
             if (session?.user) {
                 const name = session.user.user_metadata?.name || '';
                 
@@ -151,6 +157,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           setError(signOutError.message);
           throw signOutError;
         }
+
+        setUser(null);
       } catch (err: any) {
         console.error('Sign out error: ', err);
         setError(err.message || 'Sign out failed');
@@ -159,6 +167,88 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         setIsLoading(false);
       }
     };
+
+    const updateName = async (name: string) => {
+    setIsLoading(true);
+    setError(null);
+    try {
+        const { error: authError } = await supabase.auth.updateUser({
+            data: { name }
+        });
+        if (authError) throw authError;
+
+        const { error: profileError } = await supabase
+            .from('profiles')
+            .update({ name })
+            .eq('id', user!.id);
+        if (profileError) throw profileError;
+
+        setUser(prev => prev ? { ...prev, name } : null);
+    } catch (err: any) {
+        setError(err.message || 'Failed to update name');
+        throw err;
+    } finally {
+        setIsLoading(false);
+    }
+};
+
+  const updateEmail = async (email: string) => {
+    setIsLoading(true);
+    setError(null);
+    try {
+        const { error: authError } = await supabase.auth.updateUser({ email });
+        if (authError) throw authError;
+
+        const { error: profileError } = await supabase
+            .from('profiles')
+            .update({ email })
+            .eq('id', user!.id);
+        if (profileError) throw profileError;
+
+        setUser(prev => prev ? { ...prev, email } : null);
+    } catch (err: any) {
+        setError(err.message || 'Failed to update email');
+        throw err;
+    } finally {
+        setIsLoading(false);
+    }
+  };
+
+  const updatePassword = async (password: string) => {
+    setIsLoading(true);
+    setError(null);
+    try {
+        const { error } = await supabase.auth.updateUser({ password });
+        if (error) throw error;
+    } catch (err: any) {
+        setError(err.message || 'Failed to update password');
+        throw err;
+    } finally {
+        setIsLoading(false);
+    }
+  };
+
+  const deleteAccount = async () => {
+    setIsLoading(true);
+    setError(null);
+    try {
+        const { error: profileError } = await supabase
+            .from('profiles')
+            .delete()
+            .eq('id', user!.id);
+        if (profileError) throw profileError;
+
+        const { error: authError } = await supabase.auth.admin.deleteUser(user!.id);
+        if (authError) throw authError;
+
+        await signOut();
+    } catch (err: any) {
+        setError(err.message || 'Failed to delete account');
+        throw err;
+    } finally {
+        setIsLoading(false);
+    }
+  };
 
     const clearError = () => setError(null);
 
@@ -171,6 +261,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     signUp,
     signIn,
     signOut,
+    updateName,
+    updateEmail,
+    updatePassword,
+    deleteAccount,
     clearError,
   };
 
