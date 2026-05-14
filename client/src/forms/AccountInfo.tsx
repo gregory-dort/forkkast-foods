@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 
+type Tab = 'name' | 'email' | 'password' | 'delete';
+
 const AccountSettingsForm = () => {
     const { user, updateName, updateEmail, updatePassword, deleteAccount } = useAuth();
     const navigate = useNavigate();
