@@ -38,13 +38,13 @@ const MealDetailModal = ({ meal, onUpdate, onDelete }: MealDetailModalProps) => 
             <div className="flex flex-row gap-4 justify-end">
                 <button
                     onClick={onUpdate}
-                    className="px-4 py-2 rounded-md bg-forest-green hover:bg-deep-green text-warm-brown transition duration-300"
+                    className="px-4 py-2 rounded-md bg-harvest-gold text-warm-brown transition duration-300"
                 >
                     Update
                 </button>
                 <button
                     onClick={onDelete}
-                    className="px-4 py-2 rounded-md bg-terracotta text-warm-brown hover:opacity-90 transition   duration-300"
+                    className="px-4 py-2 rounded-md bg-terracotta text-warm-brown hover:opacity-90 transition duration-300"
                 >
                     Delete
                 </button>

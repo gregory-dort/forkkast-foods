@@ -17,7 +17,7 @@ const MealCard = ({ meal, showActions, onUpdate, onDelete, onSelect }: MealCardP
 
             {showActions && (
                 <div className='flex flex-row gap-2'>
-                    <button onClick={(e) => { e.stopPropagation(); onUpdate?.() }} className='rounded-md bg-forest-green hover:bg-deep-green text-warm-brown p-4'>Update</button>
+                    <button onClick={(e) => { e.stopPropagation(); onUpdate?.() }} className='rounded-md bg-emerald-green hover:bg-deep-green text-warm-brown p-4'>Update</button>
                     <button onClick={(e) => { e.stopPropagation(); onDelete?.() }} className='rounded-md bg-terracotta text-warm-brown p-4'>Delete</button>
                 </div>
             )}
