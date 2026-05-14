@@ -2,7 +2,6 @@ import { useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import useMeals from '../hooks/useMeals';
-//import { useAuth } from '../hooks/useAuth';
 import { Hero } from '../components';
 import { ScheduleCard, RecentMealsCard } from '../pages';
 
