@@ -75,7 +75,7 @@ const AccountSettingsForm = () => {
         setIsSubmitting(true);
         try {
             await deleteAccount();
-            navigate('/');
+            navigate('/', { replace: true });
         } catch {
             setError('Failed to delete account. Please try again.');
         } finally {
