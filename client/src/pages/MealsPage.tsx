@@ -27,7 +27,7 @@ const MealsPage = () => {
             <div className='flex flex-row justify-center items-center gap-4 mb-8'>
                 <button
                     onClick={() => navigate('/home')}
-                    className='bg-tan hover:bg-warm-brown text-warm-brown hover:text-cream rounded-md shadow-sm p-4'
+                    className='bg-harvest-gold hover:bg-warm-brown text-warm-brown hover:text-cream rounded-md shadow-sm p-4'
                 >
                     ← Back to Home
                 </button>
